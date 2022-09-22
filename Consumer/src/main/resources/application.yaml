@@ -2,7 +2,9 @@ server:
   port: 8081
 spring:
   datasource:
-    username: vlad
     url: jdbc:postgresql://localhost:5432/postgres
+    username: vlad
     password: admin
     driver-class-name: org.postgresql.Driver
+kafka:
+  server: localhost:29092
