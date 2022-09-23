@@ -7,4 +7,4 @@ spring:
     password: admin
     driver-class-name: org.postgresql.Driver
 kafka:
-  server: localhost:29092
+  server: localhost:9092
