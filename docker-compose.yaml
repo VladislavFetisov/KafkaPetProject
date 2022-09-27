@@ -7,6 +7,15 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     ports:
       - "22181:2181"
+  db:
+    image: postgres:13.8-alpine
+    container_name: postgres
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: vlad
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: postgres
   kafka:
     image: confluentinc/cp-kafka:latest
     depends_on:
@@ -31,3 +40,18 @@ services:
       - kafka
     environment:
       KAFKA_SERVER: kafka:29092
+  consumer:
+    build:
+      context: ./Consumer
+      dockerfile: Dockerfile
+    container_name: consumer
+    ports:
+      - "8081:8081"
+    depends_on:
+      - db
+      - kafka
+    environment:
+      KAFKA_SERVER: kafka:29092
+      DATASOURCE_URL: jdbc:postgresql://db:5432/postgres
+      DATASOURCE_USERNAME: vlad
+      DATASOURCE_PASSWORD: admin

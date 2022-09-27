@@ -23,11 +23,4 @@ public class UserService {
         logger.info(user.toString());
         repository.saveUser(user);
     }
-
-    @KafkaListener(topics = "users", groupId = "bar")
-    public void processOtherGroup(User user) {
-        logger.info(user.toString());
-        logger.info("users from other groups");
-        repository.saveUser(user);
-    }
 }

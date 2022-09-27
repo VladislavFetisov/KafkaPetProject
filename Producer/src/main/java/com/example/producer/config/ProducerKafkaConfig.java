@@ -16,7 +16,6 @@ import java.util.Map;
 
 @Configuration
 public class ProducerKafkaConfig {
-
     @Value("${kafka.server}")
     private String serverHost;
 
@@ -28,8 +27,9 @@ public class ProducerKafkaConfig {
         configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
         return new DefaultKafkaProducerFactory<>(configProps);
     }
+
     @Bean
-    public KafkaTemplate<String,User> kafkaTemplate() {
+    public KafkaTemplate<String, User> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
- }
+}
